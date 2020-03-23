@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "106305840409",
+    "firebase_url": "https://schoolnews-461e5.firebaseio.com",
+    "project_id": "schoolnews-461e5",
+    "storage_bucket": "schoolnews-461e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106305840409:android:0ad1ddb9bbb37662435188",
+        "android_client_info": {
+          "package_name": "com.example.schoolnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106305840409-5ae90s6e03c43hfdp8kn21sv596q1kbn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx1T8u87YqhfvQYbQgJ0x27uJ29EnbvqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106305840409-5ae90s6e03c43hfdp8kn21sv596q1kbn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
