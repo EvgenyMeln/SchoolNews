@@ -11,10 +11,10 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/White"
-        app:srcCompat="@drawable/pict" />
+        app:srcCompat="@drawable/icon" />
 
     <TextView
         android:id="@+id/textView"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Вход"
+        android:text="Авторизация"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp" />
 
@@ -31,9 +31,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="Почта"
         android:padding="10dp"
         android:textColorHint="@color/colorPrimaryDark"
+        android:background="@drawable/fields"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -41,9 +44,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="Пароль"
         android:padding="10dp"
         android:textColorHint="@color/colorPrimaryDark"
+        android:background="@drawable/fields"
         android:inputType="textPassword"/>
 
     <Button
