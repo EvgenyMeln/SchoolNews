@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "106305840409-uqdfvgai8ri7jk669jjgub3h64v802mp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.schoolnews",
+            "certificate_hash": "6bdaefe4e157eb4f84f8b1b9de934bbdd2ca5c43"
+          }
+        },
+        {
           "client_id": "106305840409-5ae90s6e03c43hfdp8kn21sv596q1kbn.apps.googleusercontent.com",
           "client_type": 3
         }

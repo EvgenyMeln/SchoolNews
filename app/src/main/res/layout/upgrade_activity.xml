@@ -12,51 +12,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Регистрация"
+        android:text="Введите имя и школу"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/login_reg"
+        android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        android:hint="Почта"
+        android:hint="Имя"
         android:padding="10dp"
         android:background="@drawable/fields"
         android:textColorHint="@color/colorPrimaryDark"
-        android:inputType="textEmailAddress" />
+        android:inputType="text"/>
 
     <EditText
-        android:id="@+id/password_reg"
+        android:id="@+id/school"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        android:hint="Пароль"
+        android:hint="Школа"
         android:padding="10dp"
         android:background="@drawable/fields"
         android:textColorHint="@color/colorPrimaryDark"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/confirm_password_reg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/fields"
-        android:hint="Повторите пароль"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:textColorHint="@color/colorPrimaryDark" />
+        android:inputType="number"/>
 
     <Button
-        android:id="@+id/btn_reg"
+        android:id="@+id/btn_upgrade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
@@ -64,6 +51,7 @@
         android:layout_marginRight="70dp"
         android:background="@color/colorPrimaryDark"
         android:padding="10dp"
-        android:text="Продолжить"
-        android:textColor="@color/White" />
+        android:text="Зарегистрироваться"
+        android:onClick="onClick"
+        android:textColor="@color/White"/>
 </LinearLayout>

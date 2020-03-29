@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,15 +25,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private EditText email_reg;
     private EditText password_reg;
+    private EditText confirm_password_reg;
+
+    private String pass1;
+    private String pass2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
-
-        ActionBar actionBar =getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -49,41 +51,49 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         email_reg = findViewById(R.id.login_reg);
         password_reg = findViewById(R.id.password_reg);
+        confirm_password_reg = findViewById(R.id.confirm_password_reg);
 
         findViewById(R.id.btn_reg).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        pass1 = password_reg.getText().toString();
+        pass2 = confirm_password_reg.getText().toString();
+
         if(view.getId() == R.id.btn_reg)
         {
-            registration(email_reg.getText().toString(),password_reg.getText().toString());
+            if (pass1.equals(pass2)){
+                registration(email_reg.getText().toString(),password_reg.getText().toString());
+            }
+            else {
+                Toast.makeText(RegisterActivity.this, "Пароли не совпадают", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     public void registration (String email , String password){
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
                     Toast.makeText(RegisterActivity.this, "Зарегистрирован", Toast.LENGTH_SHORT).show();
-                    finish();
+                    check(true);
                 }
-                else
-                    Toast.makeText(RegisterActivity.this, "Ошибка", Toast.LENGTH_SHORT).show();
+                else{
+                    String error = task.getException().getMessage();
+                    Toast.makeText(RegisterActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    public void check(boolean t){
+        if (t = true){
+            Intent intent = new Intent(this, UpgradeActivity.class);
+            startActivity(intent);
         }
     }
 }
