@@ -10,9 +10,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
         android:background="@color/White"
         app:srcCompat="@drawable/icon" />
 
@@ -20,7 +21,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="Авторизация"
         android:textColor="@color/colorPrimaryDark"
@@ -35,7 +36,7 @@
         android:layout_marginRight="30dp"
         android:hint="Почта"
         android:padding="10dp"
-        android:textColorHint="@color/colorPrimaryDark"
+        android:textColorHint="@color/Grey"
         android:background="@drawable/fields"
         android:inputType="textEmailAddress" />
 
@@ -48,7 +49,7 @@
         android:layout_marginRight="30dp"
         android:hint="Пароль"
         android:padding="10dp"
-        android:textColorHint="@color/colorPrimaryDark"
+        android:textColorHint="@color/Grey"
         android:background="@drawable/fields"
         android:inputType="textPassword"/>
 

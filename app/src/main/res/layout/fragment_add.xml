@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/White"
     tools:context=".AddFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/news_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Создать новость"
-        android:textSize="40dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:hint="Название новости"
+        android:padding="10dp"
+        android:background="@drawable/fields"
+        android:textColorHint="@color/Grey"
+        android:inputType="text"/>
 
-</FrameLayout>
+
+</LinearLayout>

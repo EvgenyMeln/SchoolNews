@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Введите имя и школу"
+        android:text="Введите ваши данные"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp" />
 
@@ -20,17 +20,30 @@
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:hint="Имя"
         android:padding="10dp"
         android:background="@drawable/fields"
-        android:textColorHint="@color/colorPrimaryDark"
+        android:textColorHint="@color/Grey"
         android:inputType="text"/>
 
     <EditText
-        android:id="@+id/school"
+        android:id="@+id/user_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:hint="Дата рождения"
+        android:padding="10dp"
+        android:background="@drawable/fields"
+        android:textColorHint="@color/Grey"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/user_school"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -39,8 +52,41 @@
         android:hint="Школа"
         android:padding="10dp"
         android:background="@drawable/fields"
-        android:textColorHint="@color/colorPrimaryDark"
+        android:textColorHint="@color/Grey"
         android:inputType="number"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp">
+
+        <EditText
+            android:id="@+id/user_class_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="Класс"
+            android:textColorHint="@color/Grey"
+            android:inputType="number"
+            android:background="@drawable/fields"/>
+
+        <EditText
+            android:id="@+id/user_class_letter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Буква"
+            android:textColorHint="@color/Grey"
+            android:inputType="text"
+            android:background="@drawable/fields"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_upgrade"
@@ -52,6 +98,6 @@
         android:background="@color/colorPrimaryDark"
         android:padding="10dp"
         android:text="Зарегистрироваться"
-        android:onClick="onClick"
+        android:onClick="onClickReg"
         android:textColor="@color/White"/>
 </LinearLayout>
