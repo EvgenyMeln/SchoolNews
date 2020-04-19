@@ -1,4 +1,4 @@
-package com.example.schoolnews;
+package com.example.schoolnews.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

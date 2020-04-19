@@ -1,4 +1,4 @@
-package com.example.schoolnews;
+package com.example.schoolnews.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.schoolnews.authentication.LoginActivity;
 import com.example.schoolnews.databinding.FragmentAccountBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -71,6 +71,8 @@ public class AccountFragment extends Fragment {
                         transaction.update(DocRef, "school", binding.userSchoolEdit.getText().toString());
                         transaction.update(DocRef, "class_number", binding.userClassNumberEdit.getText().toString());
                         transaction.update(DocRef, "class_letter", binding.userClassLetterEdit.getText().toString());
+
+                        Toast.makeText(AccountFragment.this.getActivity(), "Изменено", Toast.LENGTH_SHORT).show();
 
                         return null;
                     }

@@ -3,22 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="20dp"
     android:background="@color/White"
-    tools:context=".AddFragment">
+    tools:context=".fragments.AddFragment">
 
     <EditText
         android:id="@+id/news_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:hint="Название новости"
         android:padding="10dp"
-        android:background="@drawable/fields"
-        android:textColorHint="@color/Grey"
         android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/news_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:hint="Описание новости"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/btn_publish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="70dp"
+        android:background="@color/colorPrimaryDark"
+        android:padding="10dp"
+        android:text="Опубликовать"
+        android:textColor="@color/White" />
 
 
 </LinearLayout>

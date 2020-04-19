@@ -1,4 +1,4 @@
-package com.example.schoolnews;
+package com.example.schoolnews.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.schoolnews.MainActivity;
 import com.example.schoolnews.databinding.UpgradeActivityBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
