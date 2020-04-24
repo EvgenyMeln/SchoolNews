@@ -86,7 +86,11 @@ public class AddFragment extends Fragment {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d(TAG, "DocumentSnapshot successfully written!");
+
                                         Toast.makeText(AddFragment.this.getActivity(), "Опубликовано", Toast.LENGTH_SHORT).show();
+
+                                        binding.newsText.setText("");
+                                        binding.newsName.setText("");
                                     }
                                 })
                                         .addOnFailureListener(new OnFailureListener() {

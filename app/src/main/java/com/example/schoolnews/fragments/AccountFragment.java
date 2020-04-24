@@ -72,7 +72,11 @@ public class AccountFragment extends Fragment {
                         transaction.update(DocRef, "class_number", binding.userClassNumberEdit.getText().toString());
                         transaction.update(DocRef, "class_letter", binding.userClassLetterEdit.getText().toString());
 
-                        Toast.makeText(AccountFragment.this.getActivity(), "Изменено", Toast.LENGTH_SHORT).show();
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(AccountFragment.this.getActivity(), "Изменено", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
                         return null;
                     }
