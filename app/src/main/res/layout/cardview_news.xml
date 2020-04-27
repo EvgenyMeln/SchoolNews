@@ -13,7 +13,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Автор:"
+            android:text="Автор новости: "
             android:textSize="20dp"
             android:layout_alignParentStart="true"/>
 
@@ -63,7 +63,6 @@
             android:layout_below="@id/cv_linear_layout"
             android:layout_alignParentStart="true"
             android:text="Название новости"
-            android:gravity="center"
             android:textSize="20dp" />
 
         <TextView
@@ -71,6 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Новость"
+            android:textSize="16dp"
             android:layout_alignParentStart="true"
             android:layout_below="@id/cv_news_name"
             android:singleLine="false"/>

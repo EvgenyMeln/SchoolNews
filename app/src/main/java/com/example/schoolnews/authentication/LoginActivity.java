@@ -39,7 +39,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == binding.btnSignIn) {
-            sign_in(binding.login.getText().toString(), binding.password.getText().toString());
+            if (binding.login.getText().toString().trim().isEmpty() && binding.password.getText().toString().trim().isEmpty()) {
+                binding.textField.setError("Поле не может быть пустым");
+                binding.textField2.setError("Поле не может быть пустым");
+            } else if (binding.login.getText().toString().trim().isEmpty()) {
+                binding.textField.setError("Поле не может быть пустым");
+                binding.textField2.setError(null);
+            } else if (binding.password.getText().toString().trim().isEmpty()) {
+                binding.textField2.setError("Поле не может быть пустым");
+                binding.textField.setError(null);
+            } else {
+                binding.textField.setError(null);
+                binding.textField2.setError(null);
+                sign_in(binding.login.getText().toString(), binding.password.getText().toString());
+            }
         } else if (v == binding.btnRegister) {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
@@ -57,8 +70,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(LoginActivity.this, "Вход выполнен", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                } else
-                    Toast.makeText(LoginActivity.this, "Ошибка", Toast.LENGTH_SHORT).show();
+                } else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(LoginActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

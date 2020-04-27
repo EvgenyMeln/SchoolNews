@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -89,8 +90,8 @@ public class AddFragment extends Fragment {
 
                                         Toast.makeText(AddFragment.this.getActivity(), "Опубликовано", Toast.LENGTH_SHORT).show();
 
-                                        binding.newsText.setText("");
                                         binding.newsName.setText("");
+                                        binding.newsText.setText("");
                                     }
                                 })
                                         .addOnFailureListener(new OnFailureListener() {

@@ -36,10 +36,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == binding.btnReg) {
-            if (binding.passwordReg.getText().toString().equals(binding.confirmPasswordReg.getText().toString())) {
-                registration(binding.loginReg.getText().toString(), binding.passwordReg.getText().toString());
-            } else {
+            if (binding.loginReg.getText().toString().trim().isEmpty() && binding.passwordReg.getText().toString().trim().isEmpty() && binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                binding.textField3.setError("Поле не может быть пустым");
+                binding.textField4.setError("Поле не может быть пустым");
+                binding.textField5.setError("Поле не может быть пустым");
+            } else if (binding.loginReg.getText().toString().trim().isEmpty() && binding.passwordReg.getText().toString().trim().isEmpty()) {
+                binding.textField3.setError("Поле не может быть пустым");
+                binding.textField4.setError("Поле не может быть пустым");
+                binding.textField5.setError(null);
+            } else if (binding.passwordReg.getText().toString().trim().isEmpty() && binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                binding.textField3.setError(null);
+                binding.textField4.setError("Поле не может быть пустым");
+                binding.textField5.setError("Поле не может быть пустым");
+            } else if (binding.loginReg.getText().toString().trim().isEmpty() && binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                binding.textField3.setError("Поле не может быть пустым");
+                binding.textField4.setError(null);
+                binding.textField5.setError("Поле не может быть пустым");
+            } else if (binding.loginReg.getText().toString().trim().isEmpty()) {
+                binding.textField3.setError("Поле не может быть пустым");
+                binding.textField4.setError(null);
+                binding.textField5.setError(null);
+            } else if (binding.passwordReg.getText().toString().trim().isEmpty()) {
+                binding.textField3.setError(null);
+                binding.textField4.setError("Поле не может быть пустым");
+                binding.textField5.setError(null);
+            } else if (binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                binding.textField3.setError(null);
+                binding.textField4.setError(null);
+                binding.textField5.setError("Поле не может быть пустым");
+            } else if (!binding.passwordReg.getText().toString().equals(binding.confirmPasswordReg.getText().toString())) {
+                binding.textField3.setError(null);
+                binding.textField4.setError(null);
+                binding.textField5.setError(null);
                 Toast.makeText(RegisterActivity.this, "Пароли не совпадают", Toast.LENGTH_SHORT).show();
+            } else {
+                registration(binding.loginReg.getText().toString(), binding.passwordReg.getText().toString());
             }
         }
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,50 +11,76 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="Регистрация"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/login_reg"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="Почта"
-        android:padding="10dp"
-        android:background="@drawable/fields"
+        app:startIconDrawable="@drawable/email_icon"
         android:textColorHint="@color/Grey"
-        android:inputType="textEmailAddress" />
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/password_reg"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="Пароль"
-        android:padding="10dp"
-        android:background="@drawable/fields"
+        app:startIconDrawable="@drawable/password_icon"
         android:textColorHint="@color/Grey"
-        android:inputType="textPassword" />
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:endIconMode="password_toggle">
 
-    <EditText
-        android:id="@+id/confirm_password_reg"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/fields"
         android:hint="Повторите пароль"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:textColorHint="@color/Grey" />
+        app:startIconDrawable="@drawable/password_icon"
+        android:textColorHint="@color/Grey"
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:endIconMode="password_toggle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirm_password_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_reg"
