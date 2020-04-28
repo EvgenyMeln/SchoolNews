@@ -62,8 +62,6 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                final String randomName = random();
-
                 String User_id = mAuth.getCurrentUser().getUid();
 
                 final Map<String, String> newsMap = new HashMap<>();
@@ -83,7 +81,7 @@ public class AddFragment extends Fragment {
                                 newsMap.put("news_name", binding.newsName.getText().toString());
                                 newsMap.put("news_text", binding.newsText.getText().toString());
 
-                                firebaseFirestore.collection("News").document(randomName).set(newsMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                firebaseFirestore.collection("News").document(RandomString.getAlphaNumericString(28)).set(newsMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d(TAG, "DocumentSnapshot successfully written!");
@@ -112,21 +110,21 @@ public class AddFragment extends Fragment {
         });
     }
 
-    public static String random() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(MAX_LENGTH);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
+    public static class RandomString {
+        static String getAlphaNumericString(int n){
+            String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+            StringBuilder sb = new StringBuilder(n);
+            for (int i = 0; i < n; i++) {
+                int index = (int) (AlphaNumericString.length() * Math.random());
+                sb.append(AlphaNumericString.charAt(index));
+            }
+            return sb.toString();
         }
-        return randomStringBuilder.toString();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        @Override
+        public void onDestroyView () {
+            super.onDestroyView();
+            binding = null;
+        }
     }
-}
