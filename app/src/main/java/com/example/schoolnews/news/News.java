@@ -1,39 +1,28 @@
+
 package com.example.schoolnews.news;
 
+import java.util.Date;
+
 public class News {
-    private String author_name;
-    private String author_school;
-    private String author_class_number;
-    private String author_class_letter;
+    private String user_id;
     private String news_name;
     private String news_text;
+    private String news_image;
+    private Date timestamp;
 
     public News(){
     }
 
-    public News(String author_name, String author_school, String author_class_number, String author_class_letter, String news_name, String news_text){
-        this.author_name = author_name;
-        this.author_school = author_school;
-        this.author_class_number = author_class_number;
-        this.author_class_letter = author_class_letter;
+    public News(String user_id, String news_name, String news_text, String news_image, Date timestamp) {
+        this.user_id = user_id;
         this.news_name = news_name;
         this.news_text = news_text;
+        this.news_image = news_image;
+        this.timestamp = timestamp;
     }
 
-    public String getAuthor_name() {
-        return author_name;
-    }
-
-    public String getAuthor_school() {
-        return author_school;
-    }
-
-    public String getAuthor_class_number() {
-        return author_class_number;
-    }
-
-    public String getAuthor_class_letter() {
-        return author_class_letter;
+    public String getUser_id() {
+        return user_id;
     }
 
     public String getNews_name() {
@@ -42,5 +31,13 @@ public class News {
 
     public String getNews_text() {
         return news_text;
+    }
+
+    public String getNews_image() {
+        return news_image;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
     }
 }

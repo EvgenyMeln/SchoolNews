@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
@@ -8,20 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">
-        
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Автор новости: "
-            android:textSize="20dp"
-            android:layout_alignParentStart="true"/>
 
         <LinearLayout
             android:id="@+id/cv_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView3"
             android:layout_alignParentStart="true">
 
             <TextView
@@ -29,7 +21,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Имя"
-                android:textSize="16dp" />
+                android:textSize="14dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/cv_school"
@@ -37,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Школа"
-                android:textSize="16dp" />
+                android:textSize="14dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/cv_class_number"
@@ -45,25 +39,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Класс"
-                android:textSize="16dp" />
+                android:textSize="14dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/cv_class_letter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:text="Буква"
-                android:textSize="16dp" />
+                android:textSize="14dp"
+                android:textStyle="bold"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/cv_news_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cv_linear_layout"
+            android:layout_alignParentStart="true"
+            android:text="Дата публикации"
+            android:fontFamily="cursive"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/cv_news_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cv_linear_layout"
+            android:layout_below="@+id/cv_news_time"
             android:layout_alignParentStart="true"
+            android:gravity="center"
             android:text="Название новости"
             android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/cv_image_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cv_news_name"
+            app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
         <TextView
             android:id="@+id/cv_news_text"
@@ -72,7 +86,7 @@
             android:text="Новость"
             android:textSize="16dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/cv_news_name"
+            android:layout_below="@+id/cv_image_news"
             android:singleLine="false"/>
 
     </RelativeLayout>

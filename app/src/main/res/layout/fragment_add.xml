@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,13 +19,18 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp" />
 
+    <ImageView
+        android:id="@+id/news_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/placeholder" />
+
     <EditText
         android:id="@+id/news_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
         android:hint="Название новости"
         android:padding="10dp"
         android:inputType="text"/>
@@ -33,9 +39,7 @@
         android:id="@+id/news_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:hint="Описание новости"
         android:inputType="textMultiLine"
         android:padding="10dp"

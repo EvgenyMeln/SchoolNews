@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mRecyclerView = view.findViewById(R.id.recycler_view);
+        mRecyclerView = view.findViewById(R.id.news_list_view);
 
         return view;
     }
@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpRecyclerView() {
-        Query query = newsRef.orderBy("news_name", Query.Direction.DESCENDING);
+        Query query = newsRef.orderBy("timestamp", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<News> options = new FirestoreRecyclerOptions.Builder<News>().setQuery(query,News.class).build();
 
