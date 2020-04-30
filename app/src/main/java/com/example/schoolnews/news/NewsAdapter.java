@@ -60,7 +60,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
     @NonNull
     @Override
     public NewsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_news, parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_news, parent,false);
         context = parent.getContext();
         firebaseFirestore = FirebaseFirestore.getInstance();
         return new NewsHolder(v);

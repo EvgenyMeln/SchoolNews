@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".fragments.AccountFragment">
@@ -13,80 +14,124 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Ваши данные"
+        android:text="Введите ваши данные"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/user_name_edit"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="Имя"
-        android:padding="10dp"
-        android:background="@drawable/fields"
+        app:startIconDrawable="@drawable/person"
         android:textColorHint="@color/Grey"
-        android:inputType="text"/>
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/user_date_edit"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_name_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="Дата рождения"
-        android:padding="10dp"
-        android:background="@drawable/fields"
+        app:startIconDrawable="@drawable/birthday"
         android:textColorHint="@color/Grey"
-        android:inputType="text"/>
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/user_school_edit"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_date_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="date" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="Школа"
-        android:padding="10dp"
-        android:background="@drawable/fields"
+        app:startIconDrawable="@drawable/school"
         android:textColorHint="@color/Grey"
-        android:inputType="number"/>
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_school_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="5"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp">
 
-        <EditText
-            android:id="@+id/user_class_number_edit"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField13"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:layout_marginRight="10dp"
             android:hint="Класс"
+            android:layout_marginRight="10dp"
+            app:startIconDrawable="@drawable/school"
             android:textColorHint="@color/Grey"
-            android:inputType="number"
-            android:background="@drawable/fields"/>
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/user_class_letter_edit"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_class_number_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="2"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField14"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
             android:hint="Буква"
+            android:layout_marginLeft="10dp"
+            app:startIconDrawable="@drawable/school"
             android:textColorHint="@color/Grey"
-            android:inputType="text"
-            android:background="@drawable/fields"/>
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_class_letter_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="1"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <Button
@@ -94,19 +139,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="70dp"
         android:background="@color/colorPrimaryDark"
         android:padding="10dp"
         android:text="Изменить"
-        android:textColor="@color/White"/>
+        android:textColor="@color/White" />
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="70dp"
         android:background="@color/colorPrimaryDark"
         android:padding="10dp"
