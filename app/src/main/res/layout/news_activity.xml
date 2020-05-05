@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_recycler_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/news_name_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Название новости"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/news_text_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Новость"
+            android:textSize="16dp"
+            android:singleLine="false" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Опубликовал: "
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textSize="14dp" />
+
+        <LinearLayout
+            android:id="@+id/news_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/user_name_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Имя"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/user_school_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Школа"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/user_class_number_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Класс"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/user_class_letter_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:text="Буква"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Дата публикации:"
+            android:layout_marginTop="4dp"
+            android:textSize="14dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/news_time_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Текст"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+</ScrollView>

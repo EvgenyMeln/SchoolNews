@@ -81,6 +81,7 @@ public class AccountFragment extends Fragment {
         binding.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.progressBarAccountFragment.setVisibility(View.VISIBLE);
                 String User_id = mAuth.getCurrentUser().getUid();
 
                 final DocumentReference DocRef = firebaseFirestore.collection("Users").document(User_id);
@@ -97,6 +98,7 @@ public class AccountFragment extends Fragment {
 
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
+                                binding.progressBarAccountFragment.setVisibility(View.INVISIBLE);
                                 Toast.makeText(AccountFragment.this.getActivity(), "Изменено", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -107,12 +109,14 @@ public class AccountFragment extends Fragment {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "Transaction success!");
+                        binding.progressBarAccountFragment.setVisibility(View.INVISIBLE);
                     }
                 })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.w(TAG, "Transaction failure.", e);
+                                binding.progressBarAccountFragment.setVisibility(View.INVISIBLE);
                             }
                         });
             }

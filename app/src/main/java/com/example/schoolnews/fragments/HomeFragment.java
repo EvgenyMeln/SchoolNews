@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import com.example.schoolnews.R;
 import com.example.schoolnews.news.News;
 import com.example.schoolnews.news.NewsAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,17 +30,13 @@ public class HomeFragment extends Fragment {
     private CollectionReference newsRef;
 
     private NewsAdapter newsAdapter;
-
-    RecyclerView mRecyclerView;
-
+    private RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         mRecyclerView = view.findViewById(R.id.news_list_view);
-
         return view;
     }
 
@@ -69,11 +64,8 @@ public class HomeFragment extends Fragment {
 
     private void setUpRecyclerView() {
         Query query = newsRef.orderBy("timestamp", Query.Direction.DESCENDING);
-
         FirestoreRecyclerOptions<News> options = new FirestoreRecyclerOptions.Builder<News>().setQuery(query,News.class).build();
-
         newsAdapter = new NewsAdapter(options);
-
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(HomeFragment.this.getActivity()));
         mRecyclerView.setAdapter(newsAdapter);

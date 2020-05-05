@@ -49,6 +49,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 binding.textField2.setError("Поле не может быть пустым");
                 binding.textField.setError(null);
             } else {
+                binding.btnSignIn.setEnabled(false);
+                binding.btnGuest.setEnabled(false);
+                binding.btnRegister.setEnabled(false);
+                binding.progressBarLoginActivity.setVisibility(View.VISIBLE);
                 binding.textField.setError(null);
                 binding.textField2.setError(null);
                 sign_in(binding.login.getText().toString(), binding.password.getText().toString());
@@ -67,11 +71,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    binding.btnSignIn.setEnabled(true);
+                    binding.btnGuest.setEnabled(true);
+                    binding.btnRegister.setEnabled(true);
+                    binding.progressBarLoginActivity.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Вход выполнен", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
+                    binding.btnSignIn.setEnabled(true);
+                    binding.btnGuest.setEnabled(true);
+                    binding.btnRegister.setEnabled(true);
                     String error = task.getException().getMessage();
+                    binding.progressBarLoginActivity.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show();
                 }
             }

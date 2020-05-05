@@ -70,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 binding.textField5.setError(null);
                 Toast.makeText(RegisterActivity.this, "Пароли не совпадают", Toast.LENGTH_SHORT).show();
             } else {
+                binding.btnReg.setEnabled(false);
+                binding.progressBarRegisterActivity.setVisibility(View.VISIBLE);
                 registration(binding.loginReg.getText().toString(), binding.passwordReg.getText().toString());
             }
         }
@@ -81,10 +83,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    binding.btnReg.setEnabled(true);
+                    binding.progressBarRegisterActivity.setVisibility(View.INVISIBLE);
                     Toast.makeText(RegisterActivity.this, "Зарегистрирован", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActivity.this, UpgradeActivity.class);
                     startActivity(intent);
                 } else {
+                    binding.btnReg.setEnabled(true);
+                    binding.progressBarRegisterActivity.setVisibility(View.INVISIBLE);
                     String error = task.getException().getMessage();
                     Toast.makeText(RegisterActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show();
                 }

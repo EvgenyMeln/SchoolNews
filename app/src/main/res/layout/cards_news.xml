@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardBackgroundColor="@color/Semi_White"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -11,10 +12,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/cv_news_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Название новости"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/cv_news_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Дата публикации"
+            android:padding="5dp"
+            android:textSize="14dp" />
+
         <ImageView
             android:id="@+id/cv_image_news"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginTop="10dp"
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -33,8 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Имя"
-                    android:textSize="14dp"
-                    android:textStyle="bold"/>
+                    android:textSize="14dp"/>
 
                 <TextView
                     android:id="@+id/cv_school"
@@ -42,8 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Школа"
-                    android:textSize="14dp"
-                    android:textStyle="bold"/>
+                    android:textSize="14dp"/>
 
                 <TextView
                     android:id="@+id/cv_class_number"
@@ -51,8 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="Класс"
-                    android:textSize="14dp"
-                    android:textStyle="bold"/>
+                    android:textSize="14dp"/>
 
                 <TextView
                     android:id="@+id/cv_class_letter"
@@ -60,36 +75,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:text="Буква"
-                    android:textSize="14dp"
-                    android:textStyle="bold"/>
+                    android:textSize="14dp"/>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/cv_news_time"
+                android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Дата публикации"
-                android:textStyle="bold"
+                android:text="Подробнее..."
                 android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/cv_news_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Название новости"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/cv_news_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Новость"
-                android:textSize="16dp"
-                android:singleLine="false"/>
 
         </LinearLayout>
 

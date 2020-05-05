@@ -58,7 +58,6 @@ public class UpgradeActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
         setContentView(view);
     }
 
@@ -67,6 +66,8 @@ public class UpgradeActivity extends AppCompatActivity {
         if (binding.userName.getText().toString().trim().isEmpty()) {
             binding.textField6.setError("Поле не может быть пустым");
         } else {
+            binding.btnUpgrade.setEnabled(false);
+            binding.progressBarUpgradeActivity.setVisibility(View.VISIBLE);
             binding.textField6.setError(null);
 
             String User_id = mAuth.getCurrentUser().getUid();
@@ -81,12 +82,16 @@ public class UpgradeActivity extends AppCompatActivity {
             firebaseFirestore.collection("Users").document(User_id).set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
+                    binding.progressBarUpgradeActivity.setVisibility(View.INVISIBLE);
+                    binding.btnUpgrade.setEnabled(true);
                     Log.d(TAG, "DocumentSnapshot successfully written!");
                 }
             })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            binding.progressBarUpgradeActivity.setVisibility(View.INVISIBLE);
+                            binding.btnUpgrade.setEnabled(true);
                             Log.w(TAG, "Error writing document", e);
                         }
                     });
