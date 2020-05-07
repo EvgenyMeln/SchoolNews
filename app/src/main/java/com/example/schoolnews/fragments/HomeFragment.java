@@ -9,8 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.schoolnews.R;
 import com.example.schoolnews.news.News;
@@ -42,12 +46,13 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onViewCreated(view, savedInstanceState);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         newsRef = firebaseFirestore.collection("News");
 
-        setUpRecyclerView();
+        setUpRecyclerViewDate();
     }
 
     @Override
@@ -62,12 +67,62 @@ public class HomeFragment extends Fragment {
         newsAdapter.stopListening();
     }
 
-    private void setUpRecyclerView() {
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_sort, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.date_sort:
+                newsAdapter.stopListening();
+                setUpRecyclerViewDate();
+                Toast.makeText(HomeFragment.this.getActivity(), "Отсортировано по дате", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.name_sort:
+                newsAdapter.stopListening();
+                setUpRecyclerViewName();
+                Toast.makeText(HomeFragment.this.getActivity(), "Отсортировано по названию", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.user_sort:
+                newsAdapter.stopListening();
+                setUpRecyclerViewUser();
+                Toast.makeText(HomeFragment.this.getActivity(), "Отсортировано по пользователю", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setUpRecyclerViewDate() {
         Query query = newsRef.orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<News> options = new FirestoreRecyclerOptions.Builder<News>().setQuery(query,News.class).build();
         newsAdapter = new NewsAdapter(options);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(HomeFragment.this.getActivity()));
         mRecyclerView.setAdapter(newsAdapter);
+        newsAdapter.startListening();
+    }
+
+    private void setUpRecyclerViewName() {
+        Query query = newsRef.orderBy("news_name");
+        FirestoreRecyclerOptions<News> options = new FirestoreRecyclerOptions.Builder<News>().setQuery(query,News.class).build();
+        newsAdapter = new NewsAdapter(options);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(HomeFragment.this.getActivity()));
+        mRecyclerView.setAdapter(newsAdapter);
+        newsAdapter.startListening();
+    }
+
+    private void setUpRecyclerViewUser() {
+        Query query = newsRef.orderBy("user_id", Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<News> options = new FirestoreRecyclerOptions.Builder<News>().setQuery(query,News.class).build();
+        newsAdapter = new NewsAdapter(options);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(HomeFragment.this.getActivity()));
+        mRecyclerView.setAdapter(newsAdapter);
+        newsAdapter.startListening();
     }
 }

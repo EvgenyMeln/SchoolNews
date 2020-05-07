@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_settings"
+        android:title="Сортировать">
+        <menu>
+            <item
+                android:id="@+id/date_sort"
+                android:title="По дате" />
+
+            <item
+                android:id="@+id/name_sort"
+                android:title="По названию" />
+
+            <item
+                android:id="@+id/user_sort"
+                android:title="По пользователю" />
+        </menu>
+    </item>
+</menu>

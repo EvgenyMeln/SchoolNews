@@ -44,7 +44,6 @@ public class News {
         return timestamp;
     }
 
-
     public List<String> getNewsImages() {
         return newsImages;
     }

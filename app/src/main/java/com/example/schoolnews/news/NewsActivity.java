@@ -1,11 +1,14 @@
 package com.example.schoolnews.news;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.schoolnews.R;
@@ -17,6 +20,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+
+import me.relex.circleindicator.CircleIndicator2;
 
 public class NewsActivity extends AppCompatActivity {
 
@@ -34,6 +39,10 @@ public class NewsActivity extends AppCompatActivity {
         mRecyclerView = view.findViewById(R.id.news_recycler_activity);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Bundle arguments = getIntent().getExtras();
         Bundle args = getIntent().getBundleExtra("BUNDLE");
@@ -74,7 +83,23 @@ public class NewsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(NewsActivity.this, LinearLayoutManager.HORIZONTAL, false));
         galleryAdapter.setUrls(newsImages);
         mRecyclerView.setAdapter(galleryAdapter);
-        closeContextMenu();
+
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(mRecyclerView);
+        CircleIndicator2 indicator = view.findViewById(R.id.indicator);
+        indicator.attachToRecyclerView(mRecyclerView, pagerSnapHelper);
+        galleryAdapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
         setContentView(view);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
