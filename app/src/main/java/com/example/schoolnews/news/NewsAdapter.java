@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +41,6 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
     public NewsAdapter(@NonNull FirestoreRecyclerOptions<News> options) {
         super(options);
     }
-
     @Override
     protected void onBindViewHolder(@NonNull final NewsHolder newsHolder, int i, @NonNull final News news) {
         final String news_name = news.getNews_name();

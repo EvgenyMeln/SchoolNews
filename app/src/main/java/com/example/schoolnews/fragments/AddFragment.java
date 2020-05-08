@@ -99,73 +99,101 @@ public class AddFragment extends Fragment {
             }
         });
 
+        binding.resetAPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreviewUri = null;
+                binding.newsImage.setImageDrawable(null);
+                binding.newsImage.setVisibility(View.GONE);
+            }
+        });
+
         binding.btnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.btnPublish.setEnabled(false);
-                binding.progressBarAddFragment.setVisibility(View.VISIBLE);
-                urls_storage = new ArrayList<>();
-                final Date date = new Date();
+                if (binding.newsImage.getDrawable() == null) {
+                    Toast.makeText(AddFragment.this.getActivity(), "Превью для новости обязательно!", Toast.LENGTH_SHORT).show();
+                } else if (binding.newsName.getText().toString().trim().isEmpty()) {
+                    binding.textField25.setError("Поле не может быть пустым");
+                } else if (binding.newsText.getText().toString().trim().isEmpty()) {
+                    binding.textField25.setError(null);
+                    Toast.makeText(AddFragment.this.getActivity(), "Текст новости обязателен!", Toast.LENGTH_SHORT).show();
+                } else {
+                    binding.btnPublish.setEnabled(false);
+                    binding.progressBarAddFragment.setVisibility(View.VISIBLE);
+                    urls_storage = new ArrayList<>();
+                    final Date date = new Date();
 
-                if (PreviewUri != null) {
-                    final StorageReference filepath = storageReference.child("news_preview_images").child(RandomString.getAlphaNumericString(28) + ".jpg");
-                    filepath.putFile(PreviewUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    url_preview = uri.toString();
+                    if (PreviewUri != null) {
+                        final StorageReference filepath = storageReference.child("news_preview_images").child(RandomString.getAlphaNumericString(28) + ".jpg");
+                        filepath.putFile(PreviewUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        url_preview = uri.toString();
 
-                                }
-                            });
-                        }
-                    });
-                }
-
-                for (final Uri uri : uris) {
-                    final StorageReference filepath = storageReference.child("news_images").child(RandomString.getAlphaNumericString(28) + ".jpg");
-                    filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    urls_storage.add(uri.toString());
-
-                                    if (urls_storage.size() == uris.size()) {
-                                        News news = new News(
-                                                mAuth.getCurrentUser().getUid()
-                                                , binding.newsName.getText().toString()
-                                                , binding.newsText.getText().toString()
-                                                , urls_storage
-                                                , date
-                                                , url_preview);
-
-                                        firebaseFirestore.collection("News").document(RandomString.getAlphaNumericString(28)).set(news).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Log.d(TAG, "DocumentSnapshot successfully written!");
-
-                                                binding.progressBarAddFragment.setVisibility(View.INVISIBLE);
-                                                Toast.makeText(AddFragment.this.getActivity(), "Опубликовано", Toast.LENGTH_SHORT).show();
-                                                binding.btnPublish.setEnabled(true);
-
-                                                binding.newsName.setText("");
-                                                binding.newsText.setText("");
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "Error writing document", e);
-                                                binding.progressBarAddFragment.setVisibility(View.INVISIBLE);
-                                            }
-                                        });
                                     }
-                                }
-                            });
-                        }
-                    });
+                                });
+                            }
+                        });
+                    }
+
+                    for (final Uri uri : uris) {
+                        final StorageReference filepath = storageReference.child("news_images").child(RandomString.getAlphaNumericString(28) + ".jpg");
+                        filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        urls_storage.add(uri.toString());
+
+                                        if (urls_storage.size() == uris.size()) {
+                                            News news = new News(
+                                                    mAuth.getCurrentUser().getUid()
+                                                    , binding.newsName.getText().toString()
+                                                    , binding.newsText.getText().toString()
+                                                    , urls_storage
+                                                    , date
+                                                    , url_preview);
+
+                                            firebaseFirestore.collection("News").document(RandomString.getAlphaNumericString(28)).set(news).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+
+                                                    binding.progressBarAddFragment.setVisibility(View.INVISIBLE);
+                                                    Toast.makeText(AddFragment.this.getActivity(), "Опубликовано", Toast.LENGTH_SHORT).show();
+                                                    binding.btnPublish.setEnabled(true);
+
+                                                    PreviewUri = null;
+                                                    url_preview = null;
+                                                    binding.newsImage.setImageDrawable(null);
+                                                    binding.newsImage.setVisibility(View.GONE);
+
+                                                    urls.clear();
+                                                    uris.clear();
+                                                    urls_storage.clear();
+                                                    galleryAdapter.notifyDataSetChanged();
+
+                                                    binding.newsName.setText("");
+                                                    binding.newsText.setText("");
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error writing document", e);
+                                                    binding.progressBarAddFragment.setVisibility(View.INVISIBLE);
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -187,6 +215,7 @@ public class AddFragment extends Fragment {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(imageReturnedIntent);
             if (resultCode == RESULT_OK) {
+                binding.newsImage.setVisibility(View.VISIBLE);
                 PreviewUri = result.getUri();
                 binding.newsImage.setImageURI(PreviewUri);
 

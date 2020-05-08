@@ -35,6 +35,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> {
     public void onBindViewHolder(@NonNull GalleryHolder holder, int position) {
         Glide.with(context)
                 .load(urls.get(position))
+                .fitCenter()
                 .error(R.drawable.birthday)
                 .into(holder.getImageView());
     }
@@ -43,5 +44,4 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> {
     public int getItemCount() {
         return urls.size();
     }
-
 }

@@ -45,6 +45,14 @@
                 android:textSize="16dp" />
 
             <ImageView
+                android:id="@+id/reset_a_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/outline_close_24"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf = "@id/add_a_preview"/>
+
+            <ImageView
                 android:id="@+id/add_a_preview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +65,8 @@
             android:id="@+id/news_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:visibility="gone"/>
 
         <RelativeLayout
             android:id="@+id/cv_linear_layout"
@@ -86,20 +95,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <EditText
-            android:id="@+id/news_name"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField25"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:hint="Название новости"
-            android:padding="10dp"
-            android:inputType="text"/>
+            app:startIconDrawable="@drawable/outline_title_24"
+            android:textColorHint="@color/Grey"
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/news_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/news_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:hint="Описание новости"
             android:inputType="textMultiLine"
             android:padding="10dp"
