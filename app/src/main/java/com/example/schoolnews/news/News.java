@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class News {
+    private String news_id;
     private String user_id;
     private String news_name;
     private String news_text;
@@ -15,13 +16,19 @@ public class News {
     public News(){
     }
 
-    public News(String user_id, String news_name, String news_text, List<String> newsImages, Date timestamp, String news_image) {
+
+    public News(String news_id, String user_id, String news_name, String news_text, List<String> newsImages, Date timestamp, String news_image) {
+        this.news_id = news_id;
         this.user_id = user_id;
         this.news_name = news_name;
         this.news_text = news_text;
         this.newsImages = newsImages;
         this.timestamp = timestamp;
         this.news_image = news_image;
+    }
+
+    public String getNews_id() {
+        return news_id;
     }
 
     public String getUser_id() {

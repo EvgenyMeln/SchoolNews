@@ -10,8 +10,10 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,47 +24,61 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.NewsHolder> {
 
     public Context context;
 
     private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth firebaseAuth;
 
     public NewsAdapter(@NonNull FirestoreRecyclerOptions<News> options) {
         super(options);
     }
+
     @Override
     protected void onBindViewHolder(@NonNull final NewsHolder newsHolder, int i, @NonNull final News news) {
+        final String news_id = news.getNews_id();
         final String news_name = news.getNews_name();
         final String news_text = news.getNews_text();
         final Date news_time = news.getTimestamp();
         final String user_id = news.getUser_id();
         final List<String> newsImages = news.getNewsImages();
 
+        if (firebaseAuth.getCurrentUser() != null) {
+            String current_user_id = firebaseAuth.getCurrentUser().getUid();
+        }
+
         newsHolder.tv_news_name.setText(news_name);
-        if(!newsImages.isEmpty())
+        if (!newsImages.isEmpty())
             newsHolder.setNewsImage(news.getNews_image());
         String stringDate = DateFormat.getDateTimeInstance().format(news_time);
-        if(!stringDate.isEmpty()){
+        if (!stringDate.isEmpty()) {
             newsHolder.tv_timestamp.setText(stringDate);
-        }else{
+        } else {
             newsHolder.tv_timestamp.setText("");
         }
 
         firebaseFirestore.collection("Users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
 
                     String userName = task.getResult().getString("name");
                     String userSchool = task.getResult().getString("school");
@@ -71,7 +87,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
 
                     newsHolder.setUserData(userName, userSchool, userClassNumber, userClassLetter);
 
-                } else{
+                } else {
                     //
                 }
             }
@@ -87,23 +103,91 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                 intent.putExtra("user_id", user_id);
                 intent.putExtra("news_time_activity", news_time);
                 Bundle args = new Bundle();
-                args.putSerializable("newsImages",(Serializable)newsImages);
-                intent.putExtra("BUNDLE",args);
+                args.putSerializable("newsImages", (Serializable) newsImages);
+                intent.putExtra("BUNDLE", args);
                 context.startActivity(intent);
             }
         });
+
+        //Подсчет лайков
+        firebaseFirestore.collection("News/" + news_id + "/Likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+
+                if (!documentSnapshots.isEmpty()) {
+
+                    int likes = documentSnapshots.size();
+                    newsHolder.updateLikeCount(likes);
+
+                } else {
+                    newsHolder.updateLikeCount(0);
+                }
+
+            }
+        });
+
+        //Получение лайков
+        if (firebaseAuth.getCurrentUser() != null) {
+            String current_user_id = firebaseAuth.getCurrentUser().getUid();
+            firebaseFirestore.collection("News/" + news_id + "/Likes").document(current_user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                    if (documentSnapshot.exists()) {
+                        newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.like_accent));
+                    } else {
+                        newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.like_grey));
+                    }
+
+                }
+            });
+        } else {
+            newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.like_grey));
+        }
+
+        //Лайк фича
+        newsHolder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (firebaseAuth.getCurrentUser() != null) {
+
+                    final String current_user_id = firebaseAuth.getCurrentUser().getUid();
+                    firebaseFirestore.collection("News/" + news_id + "/Likes").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                            if (!task.getResult().exists()) {
+                                Map<String, Object> likesMap = new HashMap<>();
+                                likesMap.put("timestamp", FieldValue.serverTimestamp());
+
+                                firebaseFirestore.collection("News/" + news_id + "/Likes").document(current_user_id).set(likesMap);
+                            } else {
+                                firebaseFirestore.collection("News/" + news_id + "/Likes").document(current_user_id).delete();
+                            }
+
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(context, "Гостям нельзя ставить лайки", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     @NonNull
     @Override
     public NewsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_news, parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_news, parent, false);
         context = parent.getContext();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         return new NewsHolder(v);
     }
 
-    public class NewsHolder extends RecyclerView.ViewHolder{
+    public class NewsHolder extends RecyclerView.ViewHolder {
         TextView tv_user_name;
         TextView tv_user_school;
         TextView tv_user_class_number;
@@ -111,24 +195,29 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         TextView tv_news_name;
         TextView tv_timestamp;
         ImageView tv_news_image;
+
+        ImageView like;
+        TextView like_count;
+
         View itemView;
 
         public NewsHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
-            tv_news_image= itemView.findViewById(R.id.cv_image_news);
+            tv_news_image = itemView.findViewById(R.id.cv_image_news);
             tv_news_name = itemView.findViewById(R.id.cv_news_name);
             tv_timestamp = itemView.findViewById(R.id.cv_news_time);
+            like = itemView.findViewById(R.id.like);
         }
 
-        public void setNewsImage(String downloadUri){
+        public void setNewsImage(String downloadUri) {
             Picasso.get()
                     .load(downloadUri)
                     .error(R.drawable.birthday)
                     .into(tv_news_image);
         }
 
-        public void setUserData(String userName, String userSchool, String userClassNumber, String userClassLetter){
+        public void setUserData(String userName, String userSchool, String userClassNumber, String userClassLetter) {
 
             tv_user_name = itemView.findViewById(R.id.cv_name);
             tv_user_school = itemView.findViewById(R.id.cv_school);
@@ -142,5 +231,9 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
 
         }
 
+        public void updateLikeCount(int like) {
+            like_count = itemView.findViewById(R.id.like_count);
+            like_count.setText("" + like + "");
+        }
     }
 }

@@ -1,145 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.AddFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:background="@color/White">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/progressBar_add_fragment"
-            style="?android:attr/progressBarStyleHorizontal"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="invisible"
-            android:indeterminateTint="@color/colorPrimary"/>
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@color/White">
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Публикация новости"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="24sp" />
-
-        <RelativeLayout
-            android:id="@+id/cv_linear_layout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/text4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Выберете превью для новости: "
-                android:textSize="16dp" />
-
-            <ImageView
-                android:id="@+id/reset_a_preview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/outline_close_24"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf = "@id/add_a_preview"/>
-
-            <ImageView
-                android:id="@+id/add_a_preview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_add_a_photo_24"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/news_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:visibility="gone"/>
-
-        <RelativeLayout
-            android:id="@+id/cv_linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/text3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Горизонтальные фото для новости: "
-                android:textSize="16dp" />
-
-            <ImageView
-                android:id="@+id/add_a_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_add_a_photo_24"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/gallery_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField25"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Название новости"
-            app:startIconDrawable="@drawable/outline_title_24"
-            android:textColorHint="@color/Grey"
-            app:errorEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/news_name"
+            <ProgressBar
+                android:id="@+id/progressBar_add_fragment"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:indeterminate="true"
+                android:visibility="invisible"
+                android:indeterminateTint="@color/colorPrimary"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Публикация новости"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/news_text"
+            <RelativeLayout
+                android:id="@+id/cv_linear_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Выберете превью для новости: "
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/reset_a_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/outline_close_24"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf = "@id/add_a_preview"/>
+
+                <ImageView
+                    android:id="@+id/add_a_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baseline_add_a_photo_24"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/news_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/cv_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Горизонтальные фото для новости: "
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/add_a_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baseline_add_a_photo_24"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gallery_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Название новости"
+                app:startIconDrawable="@drawable/outline_title_24"
+                android:textColorHint="@color/Grey"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/news_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/news_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Описание новости"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:scrollbars="vertical" />
+
+            <Button
+                android:id="@+id/btn_publish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="70dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                android:text="Опубликовать"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Описание новости"
-            android:inputType="textMultiLine"
-            android:padding="10dp"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:id="@+id/btn_publish"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="70dp"
-            android:background="@color/colorPrimaryDark"
-            android:padding="10dp"
-            android:text="Опубликовать"
-            android:textColor="@color/White" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:clickable="true"
+            app:fabSize="auto"
+            android:src="@drawable/outline_view_headline_24"
+            android:backgroundTint="@color/colorPrimary"/>
 
     </LinearLayout>
 
-</ScrollView>
+</RelativeLayout>

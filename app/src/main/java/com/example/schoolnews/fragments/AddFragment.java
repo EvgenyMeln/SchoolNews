@@ -1,6 +1,9 @@
 package com.example.schoolnews.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -22,6 +25,7 @@ import com.example.schoolnews.gallery.GalleryAdapter;
 import com.example.schoolnews.news.News;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -73,6 +77,8 @@ public class AddFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.floatingActionButton.setColorFilter(Color.argb(255, 255, 255, 255));
+
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -87,6 +93,23 @@ public class AddFragment extends Fragment {
                         .setMinCropResultSize(1024, 512)
                         .setAspectRatio(2, 1)
                         .start(getContext(), AddFragment.this);
+            }
+        });
+
+        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddFragment.this.getContext());
+                builder.setTitle("Инструкция для публикации")
+                        .setMessage("Чтобы опубликовать новость нужно:"+ "\n" + "1)Выбрать превью фото для новости"+ "\n" + "2)Выбрать любое количество горизонталных фотографий для галереи в новости(необязательно)"+ "\n" + "3)Написать название новости"+ "\n" + "4)Написать текст самой новости"+ "\n" + "Удачи и будьте креативными!")
+                        .setPositiveButton("Ясно", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
@@ -140,6 +163,8 @@ public class AddFragment extends Fragment {
                         });
                     }
 
+                    final String news_id = RandomString.getAlphaNumericString(28);
+
                     for (final Uri uri : uris) {
                         final StorageReference filepath = storageReference.child("news_images").child(RandomString.getAlphaNumericString(28) + ".jpg");
                         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -152,14 +177,15 @@ public class AddFragment extends Fragment {
 
                                         if (urls_storage.size() == uris.size()) {
                                             News news = new News(
-                                                    mAuth.getCurrentUser().getUid()
+                                                    news_id
+                                                    ,mAuth.getCurrentUser().getUid()
                                                     , binding.newsName.getText().toString()
                                                     , binding.newsText.getText().toString()
                                                     , urls_storage
                                                     , date
                                                     , url_preview);
 
-                                            firebaseFirestore.collection("News").document(RandomString.getAlphaNumericString(28)).set(news).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            firebaseFirestore.collection("News").document(news_id).set(news).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Log.d(TAG, "DocumentSnapshot successfully written!");

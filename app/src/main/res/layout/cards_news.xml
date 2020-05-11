@@ -86,6 +86,25 @@
                 android:text="Подробнее..."
                 android:textSize="14dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/like"
+                    android:background="@drawable/like_grey"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"/>
+
+                <TextView
+                    android:id="@+id/like_count"
+                    android:layout_width="32dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="bottom"
+                    android:text="Лайки"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
