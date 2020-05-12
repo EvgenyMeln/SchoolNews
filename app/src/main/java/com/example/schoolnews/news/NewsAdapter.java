@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.schoolnews.R;
 import com.example.schoolnews.authentication.LoginActivity;
+import com.example.schoolnews.comments.CommentActivity;
 import com.example.schoolnews.fragments.HomeFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -60,10 +61,6 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         final Date news_time = news.getTimestamp();
         final String user_id = news.getUser_id();
         final List<String> newsImages = news.getNewsImages();
-
-        if (firebaseAuth.getCurrentUser() != null) {
-            String current_user_id = firebaseAuth.getCurrentUser().getUid();
-        }
 
         newsHolder.tv_news_name.setText(news_name);
         if (!newsImages.isEmpty())
@@ -175,6 +172,36 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
             }
         });
 
+        //Подсчет комментов
+        firebaseFirestore.collection("News/" + news_id + "/Comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+
+                if (!documentSnapshots.isEmpty()) {
+
+                    int comments = documentSnapshots.size();
+                    newsHolder.updateCommentCount(comments);
+
+                } else {
+                    newsHolder.updateCommentCount(0);
+                }
+
+            }
+        });
+
+        //Коммент
+        newsHolder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    Intent commentIntent = new Intent(context, CommentActivity.class);
+                    commentIntent.putExtra("news_id", news_id);
+                    context.startActivity(commentIntent);
+                }else {
+                    Toast.makeText(context, "Гостям нельзя смотреть комментарии", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @NonNull
@@ -199,6 +226,9 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         ImageView like;
         TextView like_count;
 
+        ImageView comment;
+        TextView comment_count;
+
         View itemView;
 
         public NewsHolder(@NonNull View itemView) {
@@ -208,6 +238,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
             tv_news_name = itemView.findViewById(R.id.cv_news_name);
             tv_timestamp = itemView.findViewById(R.id.cv_news_time);
             like = itemView.findViewById(R.id.like);
+            comment = itemView.findViewById(R.id.comment);
         }
 
         public void setNewsImage(String downloadUri) {
@@ -234,6 +265,11 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         public void updateLikeCount(int like) {
             like_count = itemView.findViewById(R.id.like_count);
             like_count.setText("" + like + "");
+        }
+
+        public void updateCommentCount(int comment) {
+            comment_count = itemView.findViewById(R.id.comment_count);
+            comment_count.setText("" + comment + "");
         }
     }
 }

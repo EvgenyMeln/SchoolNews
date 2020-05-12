@@ -103,6 +103,20 @@
                     android:layout_height="16dp"
                     android:layout_gravity="bottom"
                     android:text="Лайки"/>
+
+                <ImageView
+                    android:id="@+id/comment"
+                    android:background="@drawable/comment"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"/>
+
+                <TextView
+                    android:id="@+id/comment_count"
+                    android:layout_width="32dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="bottom"
+                    android:text="Комменты"/>
             </LinearLayout>
 
         </LinearLayout>
