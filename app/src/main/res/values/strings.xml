@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SchoolNews</string>
+    <string name="app_name">Школьные Новости</string>
     <string name="nav_home">Лента</string>
     <string name="nav_add">Добавить</string>
     <string name="nav_account">Аккаунт</string>

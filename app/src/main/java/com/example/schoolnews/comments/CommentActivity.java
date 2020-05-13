@@ -2,11 +2,13 @@ package com.example.schoolnews.comments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,6 +49,10 @@ public class CommentActivity extends AppCompatActivity {
         binding = CommentActivityBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -82,6 +88,7 @@ public class CommentActivity extends AppCompatActivity {
                 if (binding.commentEdit.getText().toString().trim().isEmpty()) {
                     Toast.makeText(CommentActivity.this, "Комментарий не может быть пустым", Toast.LENGTH_SHORT).show();
                 } else {
+                    binding.progressBarCommentActivity.setVisibility(View.VISIBLE);
                     current_user_id = firebaseAuth.getCurrentUser().getUid();
                     Map<String, Object> commentsMap = new HashMap<>();
                     commentsMap.put("user_id", current_user_id);
@@ -91,8 +98,11 @@ public class CommentActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if (!task.isSuccessful()) {
+                                binding.progressBarCommentActivity.setVisibility(View.INVISIBLE);
                                 Toast.makeText(CommentActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             } else {
+                                binding.progressBarCommentActivity.setVisibility(View.INVISIBLE);
+                                Toast.makeText(CommentActivity.this, "Комментарий опубликован", Toast.LENGTH_SHORT).show();
                                 binding.commentEdit.setText("");
                             }
                         }
@@ -102,5 +112,16 @@ public class CommentActivity extends AppCompatActivity {
         });
 
         setContentView(view);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

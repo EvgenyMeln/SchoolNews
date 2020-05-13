@@ -10,6 +10,14 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <ProgressBar
+            android:id="@+id/progressBar_comment_activity"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:indeterminateTint="@color/colorPrimary"/>
 
         <TextView
             android:id="@+id/textView3"

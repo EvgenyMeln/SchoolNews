@@ -2,6 +2,7 @@ package com.example.schoolnews.news;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.schoolnews.R;
 import com.example.schoolnews.authentication.LoginActivity;
 import com.example.schoolnews.comments.CommentActivity;
@@ -24,6 +30,7 @@ import com.example.schoolnews.fragments.HomeFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,6 +39,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -61,6 +69,13 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         final Date news_time = news.getTimestamp();
         final String user_id = news.getUser_id();
         final List<String> newsImages = news.getNewsImages();
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            String cur_user_id = firebaseAuth.getCurrentUser().getUid();
+            if (cur_user_id.equals(user_id)){
+                newsHolder.delete.setVisibility(View.VISIBLE);
+            }
+        }
 
         newsHolder.tv_news_name.setText(news_name);
         if (!newsImages.isEmpty())
@@ -202,6 +217,19 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                 }
             }
         });
+
+        //Удаление своей публикации
+        newsHolder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseFirestore.collection("News").document(news_id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(context, "Ваша публикация удалена", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @NonNull
@@ -222,12 +250,15 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         TextView tv_news_name;
         TextView tv_timestamp;
         ImageView tv_news_image;
+        ProgressBar progressBar;
 
         ImageView like;
         TextView like_count;
 
         ImageView comment;
         TextView comment_count;
+
+        ImageView delete;
 
         View itemView;
 
@@ -239,12 +270,26 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
             tv_timestamp = itemView.findViewById(R.id.cv_news_time);
             like = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);
+            progressBar = itemView.findViewById(R.id.progress_card);
+            delete = itemView.findViewById(R.id.delete);
         }
 
         public void setNewsImage(String downloadUri) {
-            Picasso.get()
+            Glide.with(context)
                     .load(downloadUri)
-                    .error(R.drawable.birthday)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
                     .into(tv_news_image);
         }
 
