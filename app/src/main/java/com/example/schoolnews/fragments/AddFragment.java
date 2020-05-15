@@ -77,8 +77,6 @@ public class AddFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.floatingActionButton.setColorFilter(Color.argb(255, 255, 255, 255));
-
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -96,7 +94,7 @@ public class AddFragment extends Fragment {
             }
         });
 
-        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        binding.questionMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddFragment.this.getContext());
@@ -128,6 +126,7 @@ public class AddFragment extends Fragment {
                 PreviewUri = null;
                 binding.newsImage.setImageDrawable(null);
                 binding.newsImage.setVisibility(View.GONE);
+                binding.resetAPreview.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -244,6 +243,7 @@ public class AddFragment extends Fragment {
                 binding.newsImage.setVisibility(View.VISIBLE);
                 PreviewUri = result.getUri();
                 binding.newsImage.setImageURI(PreviewUri);
+                binding.resetAPreview.setVisibility(View.VISIBLE);
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();

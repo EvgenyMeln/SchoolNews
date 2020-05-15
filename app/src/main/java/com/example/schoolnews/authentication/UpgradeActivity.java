@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -39,6 +41,127 @@ public class UpgradeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
+        binding.userName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.userName.getText().toString().trim().isEmpty()) {
+                    binding.textField6.setError("Поле не может быть пустым");
+                } else if (!binding.userName.getText().toString().trim().isEmpty()) {
+                    binding.textField6.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.userName.getText().toString().trim().isEmpty()) {
+                    binding.textField6.setError("Поле не может быть пустым");
+                } else if (!binding.userName.getText().toString().trim().isEmpty()) {
+                    binding.textField6.setError(null);
+                }
+            }
+        });
+        binding.userDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.userDate.getText().toString().trim().isEmpty()) {
+                    binding.textField7.setError("Поле не может быть пустым");
+                } else if (!binding.userDate.getText().toString().trim().isEmpty()) {
+                    binding.textField7.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.userDate.getText().toString().trim().isEmpty()) {
+                    binding.textField7.setError("Поле не может быть пустым");
+                } else if (!binding.userDate.getText().toString().trim().isEmpty()) {
+                    binding.textField7.setError(null);
+                }
+            }
+        });
+        binding.userSchool.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.userSchool.getText().toString().trim().isEmpty()) {
+                    binding.textField8.setError("Поле не может быть пустым");
+                } else if (!binding.userSchool.getText().toString().trim().isEmpty()) {
+                    binding.textField8.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.userSchool.getText().toString().trim().isEmpty()) {
+                    binding.textField8.setError("Поле не может быть пустым");
+                } else if (!binding.userSchool.getText().toString().trim().isEmpty()) {
+                    binding.textField8.setError(null);
+                }
+            }
+        });
+        binding.userClassNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.userClassNumber.getText().toString().trim().isEmpty()) {
+                    binding.textField9.setError("Поле не может быть пустым");
+                } else if (!binding.userClassNumber.getText().toString().trim().isEmpty()) {
+                    binding.textField9.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.userClassNumber.getText().toString().trim().isEmpty()) {
+                    binding.textField9.setError("Поле не может быть пустым");
+                } else if (!binding.userClassNumber.getText().toString().trim().isEmpty()) {
+                    binding.textField9.setError(null);
+                }
+            }
+        });
+        binding.userClassLetter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.userClassLetter.getText().toString().trim().isEmpty()) {
+                    binding.textField10.setError("Поле не может быть пустым");
+                } else if (!binding.userClassLetter.getText().toString().trim().isEmpty()) {
+                    binding.textField10.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.userClassLetter.getText().toString().trim().isEmpty()) {
+                    binding.textField10.setError("Поле не может быть пустым");
+                } else if (!binding.userClassLetter.getText().toString().trim().isEmpty()) {
+                    binding.textField10.setError(null);
+                }
+            }
+        });
+
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
@@ -58,6 +181,7 @@ public class UpgradeActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
         setContentView(view);
     }
 
@@ -65,7 +189,16 @@ public class UpgradeActivity extends AppCompatActivity {
 
         if (binding.userName.getText().toString().trim().isEmpty()) {
             binding.textField6.setError("Поле не может быть пустым");
-        } else {
+        } else if (binding.userDate.getText().toString().trim().isEmpty()){
+            binding.textField7.setError("Поле не может быть пустым");
+        } else if (binding.userSchool.getText().toString().trim().isEmpty()){
+            binding.textField8.setError("Поле не может быть пустым");
+        } else if (binding.userClassNumber.getText().toString().trim().isEmpty()){
+            binding.textField9.setError("Поле не может быть пустым");
+        } else if (binding.userClassLetter.getText().toString().trim().isEmpty()){
+            binding.textField10.setError("Поле не может быть пустым");
+        }
+        else {
             binding.btnUpgrade.setEnabled(false);
             binding.progressBarUpgradeActivity.setVisibility(View.VISIBLE);
             binding.textField6.setError(null);
@@ -98,6 +231,7 @@ public class UpgradeActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            UpgradeActivity.this.finish();
         }
     }
 }

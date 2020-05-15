@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -35,6 +37,79 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         binding.btnReg.setOnClickListener(this);
+
+        binding.loginReg.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.loginReg.getText().toString().trim().isEmpty()) {
+                    binding.textField3.setError("Поле не может быть пустым");
+                } else if (!binding.loginReg.getText().toString().trim().isEmpty()) {
+                    binding.textField3.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.loginReg.getText().toString().trim().isEmpty()) {
+                    binding.textField3.setError("Поле не может быть пустым");
+                } else if (!binding.loginReg.getText().toString().trim().isEmpty()) {
+                    binding.textField3.setError(null);
+                }
+            }
+        });
+        binding.passwordReg.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.passwordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField4.setError("Поле не может быть пустым");
+                } else if (!binding.passwordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField4.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.passwordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField4.setError("Поле не может быть пустым");
+                } else if (!binding.passwordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField4.setError(null);
+                }
+            }
+        });
+        binding.confirmPasswordReg.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField5.setError("Поле не может быть пустым");
+                } else if (!binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField5.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField5.setError("Поле не может быть пустым");
+                } else if (!binding.confirmPasswordReg.getText().toString().trim().isEmpty()) {
+                    binding.textField5.setError(null);
+                }
+            }
+        });
 
         setContentView(view);
     }
@@ -94,6 +169,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(RegisterActivity.this, "Зарегистрирован", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActivity.this, UpgradeActivity.class);
                     startActivity(intent);
+                    RegisterActivity.this.finish();
                 } else {
                     binding.btnReg.setEnabled(true);
                     binding.progressBarRegisterActivity.setVisibility(View.INVISIBLE);
@@ -108,7 +184,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                RegisterActivity.this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

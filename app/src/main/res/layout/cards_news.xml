@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:cardBackgroundColor="@color/Semi_White"
+    app:cardBackgroundColor="@color/White"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -18,13 +18,15 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Название новости"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:textColor="@color/Black"/>
 
         <TextView
             android:id="@+id/cv_news_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Дата публикации"
+            android:textColor="@color/Black"
             android:padding="5dp"
             android:textSize="14dp" />
 
@@ -35,9 +37,11 @@
 
             <ProgressBar
                 android:id="@+id/progress_card"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:visibility="visible" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:scaleType="centerCrop"
+                android:layout_centerInParent="true"/>
 
             <ImageView
                 android:id="@+id/cv_image_news"
@@ -64,6 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Имя"
+                    android:textColor="@color/Black"
                     android:textSize="14dp"/>
 
                 <TextView
@@ -72,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Школа"
+                    android:textColor="@color/Black"
                     android:textSize="14dp"/>
 
                 <TextView
@@ -80,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="Класс"
+                    android:textColor="@color/Black"
                     android:textSize="14dp"/>
 
                 <TextView
@@ -88,6 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:text="Буква"
+                    android:textColor="@color/Black"
                     android:textSize="14dp"/>
             </LinearLayout>
 
@@ -97,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Подробнее..."
+                android:textColor="@color/Black"
                 android:textSize="14dp" />
 
             <LinearLayout
@@ -115,7 +124,8 @@
                     android:layout_width="32dp"
                     android:layout_height="16dp"
                     android:layout_gravity="bottom"
-                    android:text="Лайки"/>
+                    android:text="Лайки"
+                    android:textColor="@color/Black"/>
 
                 <ImageView
                     android:id="@+id/comment"
@@ -129,7 +139,8 @@
                     android:layout_width="32dp"
                     android:layout_height="16dp"
                     android:layout_gravity="bottom"
-                    android:text="Комменты"/>
+                    android:text="Комменты"
+                    android:textColor="@color/Black"/>
 
                 <ImageView
                     android:id="@+id/delete"

@@ -25,15 +25,29 @@
                 android:visibility="invisible"
                 android:indeterminateTint="@color/colorPrimary"/>
 
-            <TextView
-                android:id="@+id/textView12"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Публикация новости"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="24sp" />
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Публикация новости"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/question_mark"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/outline_help_outline_24"
+                    android:layout_alignParentEnd="true"/>
+
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/cv_linear_layout1"
@@ -47,7 +61,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Выберете превью для новости: "
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:textColor="@color/Black"/>
 
                 <ImageView
                     android:id="@+id/reset_a_preview"
@@ -55,7 +70,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/outline_close_24"
                     android:layout_marginRight="10dp"
-                    android:layout_toLeftOf = "@id/add_a_preview"/>
+                    android:layout_toLeftOf = "@id/add_a_preview"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/add_a_preview"
@@ -86,7 +102,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Горизонтальные фото для новости: "
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:textColor="@color/Black"/>
 
                 <ImageView
                     android:id="@+id/add_a_photo"
@@ -148,24 +165,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="5dp">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            app:fabSize="auto"
-            android:src="@drawable/outline_view_headline_24"
-            android:backgroundTint="@color/colorPrimary"/>
-
-    </LinearLayout>
 
 </RelativeLayout>

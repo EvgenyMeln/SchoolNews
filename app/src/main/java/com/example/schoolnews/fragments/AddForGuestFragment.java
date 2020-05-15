@@ -2,6 +2,7 @@ package com.example.schoolnews.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import com.example.schoolnews.databinding.FragmentAddForGuestBinding;
 
 public class AddForGuestFragment extends Fragment {
 
-    public AddForGuestFragment(){
+    public AddForGuestFragment() {
         // Required empty public constructor
     }
 
@@ -36,6 +37,7 @@ public class AddForGuestFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(AddForGuestFragment.this.getActivity(), LoginActivity.class);
                 startActivity(intent);
+                AddForGuestFragment.this.getActivity().finish();
             }
         });
     }

@@ -2,6 +2,8 @@ package com.example.schoolnews.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,6 +35,55 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         binding.btnRegister.setOnClickListener(this);
         binding.btnGuest.setOnClickListener(this);
 
+        binding.login.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.login.getText().toString().trim().isEmpty()) {
+                    binding.textField.setError("Поле не может быть пустым");
+                } else if (!binding.login.getText().toString().trim().isEmpty()) {
+                    binding.textField.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.login.getText().toString().trim().isEmpty()) {
+                    binding.textField.setError("Поле не может быть пустым");
+                } else if (!binding.login.getText().toString().trim().isEmpty()) {
+                    binding.textField.setError(null);
+                }
+            }
+        });
+        binding.password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.password.getText().toString().trim().isEmpty()) {
+                    binding.textField2.setError("Поле не может быть пустым");
+                } else if (!binding.password.getText().toString().trim().isEmpty()) {
+                    binding.textField2.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (binding.password.getText().toString().trim().isEmpty()) {
+                    binding.textField2.setError("Поле не может быть пустым");
+                } else if (!binding.password.getText().toString().trim().isEmpty()) {
+                    binding.textField2.setError(null);
+                }
+            }
+        });
+
         setContentView(view);
     }
 
@@ -58,16 +109,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 sign_in(binding.login.getText().toString(), binding.password.getText().toString());
             }
         } else if (v == binding.btnRegister) {
+            binding.btnSignIn.setEnabled(false);
+            binding.btnGuest.setEnabled(false);
+            binding.btnRegister.setEnabled(false);
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
+            LoginActivity.this.finish();
         } else if (v == binding.btnGuest) {
-            if (mAuth.getCurrentUser() != null){
+            if (mAuth.getCurrentUser() != null) {
+                binding.btnSignIn.setEnabled(false);
+                binding.btnGuest.setEnabled(false);
+                binding.btnRegister.setEnabled(false);
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+                LoginActivity.this.finish();
             } else {
+                binding.btnSignIn.setEnabled(false);
+                binding.btnGuest.setEnabled(false);
+                binding.btnRegister.setEnabled(false);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+                LoginActivity.this.finish();
             }
         }
     }
@@ -77,13 +140,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    binding.btnSignIn.setEnabled(true);
-                    binding.btnGuest.setEnabled(true);
-                    binding.btnRegister.setEnabled(true);
                     binding.progressBarLoginActivity.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Вход выполнен", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    LoginActivity.this.finish();
                 } else {
                     binding.btnSignIn.setEnabled(true);
                     binding.btnGuest.setEnabled(true);

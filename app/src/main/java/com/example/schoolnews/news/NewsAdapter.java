@@ -57,6 +57,8 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
 
+    private List<News> newsList;
+
     public NewsAdapter(@NonNull FirestoreRecyclerOptions<News> options) {
         super(options);
     }
@@ -69,6 +71,8 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         final Date news_time = news.getTimestamp();
         final String user_id = news.getUser_id();
         final List<String> newsImages = news.getNewsImages();
+
+        newsList = new ArrayList<>();
 
         if (firebaseAuth.getCurrentUser() != null) {
             String cur_user_id = firebaseAuth.getCurrentUser().getUid();

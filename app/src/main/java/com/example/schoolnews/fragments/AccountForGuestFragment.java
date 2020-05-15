@@ -16,7 +16,7 @@ import com.example.schoolnews.databinding.FragmentAccountForGuestBinding;
 
 public class AccountForGuestFragment extends Fragment {
 
-    public AccountForGuestFragment(){
+    public AccountForGuestFragment() {
         // Required empty public constructor
     }
 
@@ -37,6 +37,7 @@ public class AccountForGuestFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(AccountForGuestFragment.this.getActivity(), LoginActivity.class);
                 startActivity(intent);
+                AccountForGuestFragment.this.getActivity().finish();
             }
         });
     }
