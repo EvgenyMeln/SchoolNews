@@ -10,6 +10,19 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <include layout="@layout/user_layout"
+            android:id="@+id/user_layout"/>
+
+        <TextView
+            android:id="@+id/news_name_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Название новости"
+            android:textSize="18dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/Black"
+            android:paddingLeft="5dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/news_recycler_activity"
             android:layout_width="match_parent"
@@ -23,16 +36,6 @@
             app:ci_drawable= "@color/Grey"/>
 
         <TextView
-            android:id="@+id/news_name_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Название новости"
-            android:textColor="@color/Black"
-            android:textStyle="bold"
-            android:textSize="18dp" />
-
-        <TextView
             android:id="@+id/news_text_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,82 +44,5 @@
             android:textSize="16dp"
             android:textColor="@color/Black"
             android:singleLine="false" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Опубликовал: "
-            android:textColor="@color/Black"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:textSize="14dp" />
-
-        <LinearLayout
-            android:id="@+id/news_linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp">
-
-            <TextView
-                android:id="@+id/user_name_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Имя"
-                android:textColor="@color/Black"
-                android:textSize="14dp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/user_school_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Школа"
-                android:textColor="@color/Black"
-                android:textSize="14dp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/user_class_number_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Класс"
-                android:textColor="@color/Black"
-                android:textSize="14dp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/user_class_letter_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:text="Буква"
-                android:textColor="@color/Black"
-                android:textSize="14dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Дата публикации:"
-            android:layout_marginTop="4dp"
-            android:textSize="14dp"
-            android:textColor="@color/Black"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/news_time_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Текст"
-            android:layout_marginTop="2dp"
-            android:textStyle="bold"
-            android:textColor="@color/Black"
-            android:textSize="14dp" />
-
     </LinearLayout>
 </ScrollView>

@@ -5,35 +5,29 @@
     android:layout_margin="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:cardBackgroundColor="@color/White"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <include layout="@layout/user_layout" />
+
         <TextView
             android:id="@+id/cv_news_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:paddingLeft="5dp"
             android:text="Название новости"
-            android:textSize="24dp"
+            android:textSize="18dp"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/Black"/>
-
-        <TextView
-            android:id="@+id/cv_news_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Дата публикации"
-            android:textColor="@color/Black"
-            android:padding="5dp"
-            android:textSize="14dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp">
+            android:layout_height="200dp">
 
             <ProgressBar
                 android:id="@+id/progress_card"
@@ -51,106 +45,64 @@
 
 
         </RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp">
 
-            <LinearLayout
-                android:id="@+id/cv_linear_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/cv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Имя"
-                    android:textColor="@color/Black"
-                    android:textSize="14dp"/>
-
-                <TextView
-                    android:id="@+id/cv_school"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Школа"
-                    android:textColor="@color/Black"
-                    android:textSize="14dp"/>
-
-                <TextView
-                    android:id="@+id/cv_class_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Класс"
-                    android:textColor="@color/Black"
-                    android:textSize="14dp"/>
-
-                <TextView
-                    android:id="@+id/cv_class_letter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="Буква"
-                    android:textColor="@color/Black"
-                    android:textSize="14dp"/>
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/like"
+                android:background="@drawable/like_grey"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp"/>
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/like_count"
+                android:layout_width="32dp"
+                android:layout_height="16dp"
+                android:layout_gravity="bottom"
+                android:text="0"
+                android:textColor="@color/Black"/>
+
+            <ImageView
+                android:id="@+id/comment"
+                android:background="@drawable/comment"
+                android:layout_marginLeft="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp"/>
+
+            <TextView
+                android:id="@+id/comment_count"
+                android:layout_width="32dp"
+                android:layout_height="16dp"
+                android:layout_gravity="bottom"
+                android:text="0"
+                android:textColor="@color/Black"/>
+
+            <ImageView
+                android:id="@+id/delete"
+                android:background="@drawable/delete"
+                android:layout_marginLeft="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp"
+                android:visibility="invisible"
+                tool:visibility="visible"/>
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:gravity="right|bottom"
                 android:text="Подробнее..."
-                android:textColor="@color/Black"
-                android:textSize="14dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
-
-                <ImageView
-                    android:id="@+id/like"
-                    android:background="@drawable/like_grey"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"/>
-
-                <TextView
-                    android:id="@+id/like_count"
-                    android:layout_width="32dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="bottom"
-                    android:text="Лайки"
-                    android:textColor="@color/Black"/>
-
-                <ImageView
-                    android:id="@+id/comment"
-                    android:background="@drawable/comment"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"/>
-
-                <TextView
-                    android:id="@+id/comment_count"
-                    android:layout_width="32dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="bottom"
-                    android:text="Комменты"
-                    android:textColor="@color/Black"/>
-
-                <ImageView
-                    android:id="@+id/delete"
-                    android:background="@drawable/delete"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:visibility="invisible"/>
-            </LinearLayout>
-
+                android:paddingBottom="5dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="0dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="@color/Black"/>
         </LinearLayout>
 
     </LinearLayout>

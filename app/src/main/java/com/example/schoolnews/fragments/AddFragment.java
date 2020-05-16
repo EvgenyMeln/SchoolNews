@@ -99,7 +99,12 @@ public class AddFragment extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddFragment.this.getContext());
                 builder.setTitle("Инструкция для публикации")
-                        .setMessage("Чтобы опубликовать новость нужно:"+ "\n" + "1)Выбрать превью фото для новости"+ "\n" + "2)Выбрать любое количество горизонталных фотографий для галереи в новости(необязательно)"+ "\n" + "3)Написать название новости"+ "\n" + "4)Написать текст самой новости"+ "\n" + "Удачи и будьте креативными!")
+                        .setMessage("Чтобы опубликовать новость нужно:"+ "\n" +
+                                "1) Выбрать превью фото для новости"+ "\n" +
+                                "2) Выбрать любое количество горизонталных фотографий для галереи в новости (необязательно)"+ "\n" +
+                                "3) Написать название новости"+ "\n" +
+                                "4) Написать текст самой новости"+ "\n" +
+                                "Удачи и будьте креативными!")
                         .setPositiveButton("Ясно", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
@@ -155,7 +160,6 @@ public class AddFragment extends Fragment {
                                     @Override
                                     public void onSuccess(Uri uri) {
                                         url_preview = uri.toString();
-
                                     }
                                 });
                             }

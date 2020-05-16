@@ -1,20 +1,16 @@
 package com.example.schoolnews.comments;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.schoolnews.R;
 import com.example.schoolnews.databinding.ActivityCommentBinding;
-import com.example.schoolnews.databinding.CommentActivityBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +32,7 @@ public class CommentActivity extends AppCompatActivity {
     List<Comment> commentList;
     CommentRecyclerAdapter commentRecyclerAdapter;
 
-    private CommentActivityBinding binding;
+    private ActivityCommentBinding binding;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
 
@@ -47,7 +42,7 @@ public class CommentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = CommentActivityBinding.inflate(getLayoutInflater());
+        binding = ActivityCommentBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         ActionBar actionBar = getSupportActionBar();

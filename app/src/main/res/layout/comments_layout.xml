@@ -3,58 +3,86 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/Semi_White"
+    app:cardBackgroundColor="@color/White"
     android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/cv_linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cv_profile_image"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/default_profile_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/comment_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Имя"
-                android:textSize="14dp"/>
+                android:textColor="@color/Black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/cv_profile_image"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="2dp"
+                android:paddingLeft="10dp"/>
 
             <TextView
-                android:id="@+id/comment_school"
+                android:id="@+id/cv_news_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="2dp"
+                android:text="Дата публикации"
+                android:textColor="@color/Black"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cv_profile_image"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/cv_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Школа"
-                android:textSize="14dp"/>
+                android:textColor="@color/Black"
+                android:textSize="12dp"
+                android:paddingRight ="2dp"
+                android:paddingTop="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/comment_class_number"
+                android:id="@+id/cv_class_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Класс"
-                android:textSize="14dp"/>
+                android:text="Класс буква"
+                android:textColor="@color/Black"
+                android:textSize="10dp"
+                android:paddingRight ="2dp"
+                android:paddingBottom="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_school" />
 
-            <TextView
-                android:id="@+id/comment_class_letter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:text="Буква"
-                android:textSize="14dp"/>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:layout_marginTop="10dp"/>
+            android:textColor="@color/Black"
+            android:padding="10dp"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

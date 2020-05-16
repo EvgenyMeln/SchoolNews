@@ -84,7 +84,9 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         newsHolder.tv_news_name.setText(news_name);
         if (!newsImages.isEmpty())
             newsHolder.setNewsImage(news.getNews_image());
-        String stringDate = DateFormat.getDateTimeInstance().format(news_time);
+
+
+        final String stringDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(news_time);
         if (!stringDate.isEmpty()) {
             newsHolder.tv_timestamp.setText(stringDate);
         } else {
@@ -100,8 +102,9 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                     String userSchool = task.getResult().getString("school");
                     String userClassNumber = task.getResult().getString("class_number");
                     String userClassLetter = task.getResult().getString("class_letter");
+                    String downloadUriProfile = task.getResult().getString("profile_image");
 
-                    newsHolder.setUserData(userName, userSchool, userClassNumber, userClassLetter);
+                    newsHolder.setUserData(userName, userSchool, userClassNumber, userClassLetter, downloadUriProfile);
 
                 } else {
                     //
@@ -109,7 +112,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
             }
         });
 
-        newsHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        newsHolder.tv_news_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, NewsActivity.class);
@@ -117,7 +120,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                 intent.putExtra("user_id", user_id);
                 intent.putExtra("news_text_activity", news_text);
                 intent.putExtra("user_id", user_id);
-                intent.putExtra("news_time_activity", news_time);
+                intent.putExtra("news_time_activity", stringDate);
                 Bundle args = new Bundle();
                 args.putSerializable("newsImages", (Serializable) newsImages);
                 intent.putExtra("BUNDLE", args);
@@ -250,10 +253,10 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         TextView tv_user_name;
         TextView tv_user_school;
         TextView tv_user_class_number;
-        TextView tv_user_class_letter;
         TextView tv_news_name;
         TextView tv_timestamp;
         ImageView tv_news_image;
+        ImageView tv_profile_image;
         ProgressBar progressBar;
 
         ImageView like;
@@ -297,17 +300,21 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                     .into(tv_news_image);
         }
 
-        public void setUserData(String userName, String userSchool, String userClassNumber, String userClassLetter) {
+        public void setUserData(String userName, String userSchool, String userClassNumber, String userClassLetter, String downloadUriProfile) {
 
             tv_user_name = itemView.findViewById(R.id.cv_name);
             tv_user_school = itemView.findViewById(R.id.cv_school);
             tv_user_class_number = itemView.findViewById(R.id.cv_class_number);
-            tv_user_class_letter = itemView.findViewById(R.id.cv_class_letter);
+            tv_profile_image = itemView.findViewById(R.id.cv_profile_image);
 
             tv_user_name.setText(userName);
-            tv_user_school.setText(userSchool);
-            tv_user_class_number.setText(userClassNumber);
-            tv_user_class_letter.setText(userClassLetter);
+            tv_user_school.setText("Школа №"+ userSchool);
+            tv_user_class_number.setText("Класс: " + userClassNumber +" " + userClassLetter);
+
+            Glide.with(context)
+                    .load(downloadUriProfile)
+                    .error(R.drawable.default_profile_image)
+                    .into(tv_profile_image);
 
         }
 

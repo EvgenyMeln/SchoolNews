@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.example.schoolnews.R;
 import com.example.schoolnews.databinding.NewsActivityBinding;
+import com.example.schoolnews.databinding.UserLayoutBinding;
 import com.example.schoolnews.gallery.GalleryAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +28,7 @@ import me.relex.circleindicator.CircleIndicator2;
 public class NewsActivity extends AppCompatActivity {
 
     private NewsActivityBinding binding;
+    private UserLayoutBinding binding_user;
     private FirebaseFirestore firebaseFirestore;
 
     private GalleryAdapter galleryAdapter;
@@ -36,6 +39,7 @@ public class NewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = NewsActivityBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        binding_user = binding.userLayout;
         mRecyclerView = view.findViewById(R.id.news_recycler_activity);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -63,11 +67,18 @@ public class NewsActivity extends AppCompatActivity {
                         String userSchool = task.getResult().getString("school");
                         String userClassNumber = task.getResult().getString("class_number");
                         String userClassLetter = task.getResult().getString("class_letter");
+                        String userProfile = task.getResult().getString("profile_image");
 
-                        binding.userNameActivity.setText(userName);
-                        binding.userSchoolActivity.setText(userSchool);
-                        binding.userClassNumberActivity.setText(userClassNumber);
-                        binding.userClassLetterActivity.setText(userClassLetter);
+                        binding_user.cvName.setText(userName);
+                        binding_user.cvSchool.setText("Школа №"+ userSchool);
+                        binding_user.cvClassNumber.setText(userClassNumber);
+                        binding_user.cvClassNumber.setText("Класс: " + userClassNumber +" " + userClassLetter);
+
+
+                        Glide.with(NewsActivity.this)
+                                .load(userProfile)
+                                .error(R.drawable.default_profile_image)
+                                .into(binding_user.cvProfileImage);
 
                     } else{
                         //
@@ -77,7 +88,7 @@ public class NewsActivity extends AppCompatActivity {
 
             binding.newsNameActivity.setText(news_name);
             binding.newsTextActivity.setText(news_text);
-            binding.newsTimeActivity.setText(news_time);
+            binding_user.cvNewsTime.setText(news_time);
         }
         galleryAdapter = new GalleryAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(NewsActivity.this, LinearLayoutManager.HORIZONTAL, false));
