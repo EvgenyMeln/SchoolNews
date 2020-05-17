@@ -1,6 +1,7 @@
 package com.example.schoolnews.authentication;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,7 +33,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
 
         binding.btnSignIn.setOnClickListener(this);
-        binding.btnRegister.setOnClickListener(this);
         binding.btnGuest.setOnClickListener(this);
 
         binding.login.addTextChangedListener(new TextWatcher() {
@@ -84,6 +84,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        binding.tvReg.setPaintFlags(binding.tvReg.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.btnSignIn.setEnabled(false);
+                binding.btnGuest.setEnabled(false);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                LoginActivity.this.finish();
+            }
+        });
+
         setContentView(view);
     }
 
@@ -102,24 +114,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } else {
                 binding.btnSignIn.setEnabled(false);
                 binding.btnGuest.setEnabled(false);
-                binding.btnRegister.setEnabled(false);
                 binding.progressBarLoginActivity.setVisibility(View.VISIBLE);
                 binding.textField.setError(null);
                 binding.textField2.setError(null);
                 sign_in(binding.login.getText().toString(), binding.password.getText().toString());
             }
-        } else if (v == binding.btnRegister) {
-            binding.btnSignIn.setEnabled(false);
-            binding.btnGuest.setEnabled(false);
-            binding.btnRegister.setEnabled(false);
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
-            LoginActivity.this.finish();
         } else if (v == binding.btnGuest) {
             if (mAuth.getCurrentUser() != null) {
                 binding.btnSignIn.setEnabled(false);
                 binding.btnGuest.setEnabled(false);
-                binding.btnRegister.setEnabled(false);
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -127,7 +130,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } else {
                 binding.btnSignIn.setEnabled(false);
                 binding.btnGuest.setEnabled(false);
-                binding.btnRegister.setEnabled(false);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 LoginActivity.this.finish();
@@ -148,7 +150,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } else {
                     binding.btnSignIn.setEnabled(true);
                     binding.btnGuest.setEnabled(true);
-                    binding.btnRegister.setEnabled(true);
                     String error = task.getException().getMessage();
                     binding.progressBarLoginActivity.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show();

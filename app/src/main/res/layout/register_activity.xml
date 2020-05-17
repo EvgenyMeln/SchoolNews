@@ -97,8 +97,21 @@
         android:layout_marginLeft="70dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="70dp"
-        android:background="@color/colorPrimaryDark"
-        android:padding="10dp"
+        android:padding="15dp"
         android:text="Продолжить"
-        android:textColor="@color/White"/>
+        app:strokeColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        app:cornerRadius="5dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    <TextView
+        android:id="@+id/tv_return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Уже зарегистрированы? Войти"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp" />
 </LinearLayout>

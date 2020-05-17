@@ -152,10 +152,12 @@
             android:layout_marginLeft="70dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="70dp"
-            android:background="@color/colorPrimaryDark"
-            android:padding="10dp"
+            android:padding="15dp"
             android:text="Опубликовать"
-            android:textColor="@color/White" />
+            app:strokeColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDark"
+            app:cornerRadius="5dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
     </LinearLayout>
 

@@ -45,14 +45,14 @@
             android:id="@+id/comment_edit"
             android:layout_width="360dp"
             android:layout_height="64dp"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:hint="Ваш комментарий..." />
 
         <ImageView
             android:id="@+id/push_comment"
-            android:layout_width="32dp"
+            android:layout_width="40dp"
             android:layout_height="64dp"
-            app:srcCompat="@drawable/send_icon"
+            app:srcCompat="@drawable/baseline_send_24"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </LinearLayout>

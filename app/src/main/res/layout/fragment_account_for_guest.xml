@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".fragments.AccountForGuestFragment">
@@ -23,9 +24,11 @@
         android:layout_marginLeft="70dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="70dp"
-        android:background="@color/colorPrimaryDark"
-        android:padding="10dp"
+        android:padding="15dp"
         android:text="Вернуться в начало"
-        android:textColor="@color/White" />
+        app:strokeColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        app:cornerRadius="5dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
 </LinearLayout>

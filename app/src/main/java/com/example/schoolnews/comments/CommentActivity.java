@@ -23,6 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +73,11 @@ public class CommentActivity extends AppCompatActivity {
                             String commentId = doc.getDocument().getId();
                             Comment comment = doc.getDocument().toObject(Comment.class);
                             commentList.add(comment);
-                            commentRecyclerAdapter.notifyDataSetChanged();
                         }
                     }
+
+                    Collections.sort(commentList, new CommentRecyclerAdapter.CommentDateComparator());
+                    commentRecyclerAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -86,10 +90,11 @@ public class CommentActivity extends AppCompatActivity {
                 } else {
                     binding.progressBarCommentActivity.setVisibility(View.VISIBLE);
                     current_user_id = firebaseAuth.getCurrentUser().getUid();
+                    final Date date = new Date();
                     Map<String, Object> commentsMap = new HashMap<>();
                     commentsMap.put("user_id", current_user_id);
                     commentsMap.put("comment", binding.commentEdit.getText().toString());
-                    commentsMap.put("timestamp", FieldValue.serverTimestamp());
+                    commentsMap.put("timestamp", date);
                     firebaseFirestore.collection("News/" + news_id + "/Comments").add(commentsMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {

@@ -1,6 +1,8 @@
 package com.example.schoolnews.news;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -128,6 +130,23 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
             }
         });
 
+        newsHolder.tv_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, NewsActivity.class);
+                intent.putExtra("news_name_activity", news_name);
+                intent.putExtra("user_id", user_id);
+                intent.putExtra("news_text_activity", news_text);
+                intent.putExtra("user_id", user_id);
+                intent.putExtra("news_time_activity", stringDate);
+                Bundle args = new Bundle();
+                args.putSerializable("newsImages", (Serializable) newsImages);
+                intent.putExtra("BUNDLE", args);
+                context.startActivity(intent);
+            }
+        });
+
+
         //Подсчет лайков
         firebaseFirestore.collection("News/" + news_id + "/Likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -153,15 +172,15 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                 public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
 
                     if (documentSnapshot.exists()) {
-                        newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.like_accent));
+                        newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.like_active));
                     } else {
-                        newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.like_grey));
+                        newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.outline_favorite_border_24));
                     }
 
                 }
             });
         } else {
-            newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.like_grey));
+            newsHolder.like.setImageDrawable(context.getDrawable(R.drawable.outline_favorite_border_24));
         }
 
         //Лайк фича
@@ -229,12 +248,28 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         newsHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseFirestore.collection("News").document(news_id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Ваша публикация удалена", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Внимание!")
+                        .setMessage("Вы уверены, что хотите удалить публикацию?")
+                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                firebaseFirestore.collection("News").document(news_id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(context, "Ваша публикация удалена", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }
@@ -255,6 +290,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         TextView tv_user_class_number;
         TextView tv_news_name;
         TextView tv_timestamp;
+        TextView tv_continue;
         ImageView tv_news_image;
         ImageView tv_profile_image;
         ProgressBar progressBar;
@@ -275,6 +311,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
             tv_news_image = itemView.findViewById(R.id.cv_image_news);
             tv_news_name = itemView.findViewById(R.id.cv_news_name);
             tv_timestamp = itemView.findViewById(R.id.cv_news_time);
+            tv_continue = itemView.findViewById(R.id.cv_continue);
             like = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);
             progressBar = itemView.findViewById(R.id.progress_card);

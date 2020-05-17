@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,10 +32,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         View view = binding.getRoot();
 
         mAuth = FirebaseAuth.getInstance();
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
         binding.btnReg.setOnClickListener(this);
 
@@ -111,6 +108,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+        binding.tvReturn.setPaintFlags(binding.tvReturn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                RegisterActivity.this.finish();
+            }
+        });
+
         setContentView(view);
     }
 
@@ -178,18 +185,5 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                RegisterActivity.this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

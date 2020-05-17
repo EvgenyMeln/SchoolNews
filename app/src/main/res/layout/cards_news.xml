@@ -54,7 +54,7 @@
 
             <ImageView
                 android:id="@+id/like"
-                android:background="@drawable/like_grey"
+                android:background="@drawable/outline_favorite_border_24"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="4dp"/>
@@ -69,7 +69,7 @@
 
             <ImageView
                 android:id="@+id/comment"
-                android:background="@drawable/comment"
+                android:background="@drawable/outline_comment_24"
                 android:layout_marginLeft="20dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -85,7 +85,7 @@
 
             <ImageView
                 android:id="@+id/delete"
-                android:background="@drawable/delete"
+                android:background="@drawable/outline_delete_outline_24"
                 android:layout_marginLeft="20dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -94,6 +94,7 @@
                 tool:visibility="visible"/>
 
             <TextView
+                android:id="@+id/cv_continue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right|bottom"
@@ -101,7 +102,7 @@
                 android:paddingBottom="5dp"
                 android:paddingEnd="5dp"
                 android:paddingStart="0dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="65dp"
                 android:textColor="@color/Black"/>
         </LinearLayout>
 

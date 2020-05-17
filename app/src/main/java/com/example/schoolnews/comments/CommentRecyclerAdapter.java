@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -124,6 +125,13 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                     .load(userProfile)
                     .error(R.drawable.default_profile_image)
                     .into(user_profile);
+        }
+    }
+
+    public static class CommentDateComparator implements Comparator<Comment>
+    {
+        public int compare(Comment left, Comment right) {
+            return left.getTimestamp().compareTo(right.getTimestamp());
         }
     }
 }

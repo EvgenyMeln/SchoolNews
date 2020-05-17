@@ -90,22 +90,12 @@
             android:layout_marginLeft="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="100dp"
-            android:background="@color/colorPrimaryDark"
-            android:padding="10dp"
+            android:padding="15dp"
             android:text="Войти"
-            android:textColor="@color/White" />
-
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="100dp"
-            android:background="@color/colorPrimaryDark"
-            android:padding="10dp"
-            android:text="Регистрация"
-            android:textColor="@color/White" />
+            app:strokeColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDark"
+            app:cornerRadius="5dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
         <Button
             android:id="@+id/btn_guest"
@@ -114,10 +104,23 @@
             android:layout_marginLeft="100dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="100dp"
-            android:background="@color/colorPrimaryDark"
-            android:padding="10dp"
+            android:padding="15dp"
             android:text="Войти как гость"
-            android:textColor="@color/White" />
+            app:strokeColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDark"
+            app:cornerRadius="5dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+        <TextView
+            android:id="@+id/tv_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Нет аккаунта? Зарегистрироваться"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
 
     </LinearLayout>
 </ScrollView>
