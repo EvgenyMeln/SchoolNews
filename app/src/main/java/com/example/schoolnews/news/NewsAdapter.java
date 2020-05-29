@@ -123,6 +123,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                 intent.putExtra("news_text_activity", news_text);
                 intent.putExtra("user_id", user_id);
                 intent.putExtra("news_time_activity", stringDate);
+                intent.putExtra("news_id", news_id);
                 Bundle args = new Bundle();
                 args.putSerializable("newsImages", (Serializable) newsImages);
                 intent.putExtra("BUNDLE", args);
@@ -139,6 +140,7 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                 intent.putExtra("news_text_activity", news_text);
                 intent.putExtra("user_id", user_id);
                 intent.putExtra("news_time_activity", stringDate);
+                intent.putExtra("news_id", news_id);
                 Bundle args = new Bundle();
                 args.putSerializable("newsImages", (Serializable) newsImages);
                 intent.putExtra("BUNDLE", args);
@@ -272,6 +274,23 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
                 alert.show();
             }
         });
+
+        //Подсчет просмотрено
+        firebaseFirestore.collection("News/" + news_id + "/Views").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+
+                if (!documentSnapshots.isEmpty()) {
+
+                    int views = documentSnapshots.size();
+                    newsHolder.updateViewCount(views);
+
+                } else {
+                    newsHolder.updateViewCount(0);
+                }
+
+            }
+        });
     }
 
     @NonNull
@@ -302,6 +321,8 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         TextView comment_count;
 
         ImageView delete;
+
+        TextView view_count;
 
         View itemView;
 
@@ -363,6 +384,11 @@ public class NewsAdapter extends FirestoreRecyclerAdapter<News, NewsAdapter.News
         public void updateCommentCount(int comment) {
             comment_count = itemView.findViewById(R.id.comment_count);
             comment_count.setText("" + comment + "");
+        }
+
+        public void updateViewCount(int view) {
+            view_count = itemView.findViewById(R.id.view_count);
+            view_count.setText("" + view + "");
         }
     }
 }

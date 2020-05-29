@@ -53,6 +53,21 @@
             android:paddingBottom="5dp">
 
             <ImageView
+                android:id="@+id/view"
+                android:background="@drawable/baseline_visibility_24"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp"/>
+
+            <TextView
+                android:id="@+id/view_count"
+                android:layout_width="32dp"
+                android:layout_height="16dp"
+                android:layout_gravity="bottom"
+                android:text="0"
+                android:textColor="@color/Black"/>
+
+            <ImageView
                 android:id="@+id/like"
                 android:background="@drawable/outline_favorite_border_24"
                 android:layout_width="25dp"
@@ -102,7 +117,7 @@
                 android:paddingBottom="5dp"
                 android:paddingEnd="5dp"
                 android:paddingStart="0dp"
-                android:layout_marginLeft="65dp"
+                android:layout_marginLeft="25dp"
                 android:textColor="@color/Black"/>
         </LinearLayout>
 

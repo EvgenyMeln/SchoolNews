@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
 
+    public static String guest_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         } else if (v == binding.btnGuest) {
             if (mAuth.getCurrentUser() != null) {
+                guest_id = RandomString.getAlphaNumericString(28);
                 binding.btnSignIn.setEnabled(false);
                 binding.btnGuest.setEnabled(false);
                 FirebaseAuth.getInstance().signOut();
@@ -128,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 LoginActivity.this.finish();
             } else {
+                guest_id = RandomString.getAlphaNumericString(28);
                 binding.btnSignIn.setEnabled(false);
                 binding.btnGuest.setEnabled(false);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -156,5 +160,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+    }
+
+    public static class RandomString {
+        static String getAlphaNumericString(int n) {
+            String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+            StringBuilder sb = new StringBuilder(n);
+            for (int i = 0; i < n; i++) {
+                int index = (int) (AlphaNumericString.length() * Math.random());
+                sb.append(AlphaNumericString.charAt(index));
+            }
+            return sb.toString();
+        }
+    }
+
+    public static String getGuest_id() {
+        return guest_id;
     }
 }
